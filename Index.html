@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d18">
+  <meta name="description" content="Welcome to My Gaming World — gaming, creativity and personal projects.">
+  <title>My Gaming World | Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #080d18;
+      --panel: #101a2b;
+      --blue: #38bdf8;
+      --blue2: #2563eb;
+      --text: #f1f5f9;
+      --muted: #9caec5;
+      --border: #23334b;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    .container { width: min(1080px, 90%); margin: auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(8,13,24,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand { font-size: 1.1rem; font-weight: 850; }
+    .brand span, .accent { color: var(--blue); }
+
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links a { color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover { color: var(--blue); }
+
+    .menu-btn {
+      display: none;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 6px 11px;
+    }
+
+    .hero {
+      min-height: 520px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 35px;
+      padding-top: 65px;
+      padding-bottom: 65px;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 7vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin: 15px 0;
+    }
+
+    h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.2; }
+    .muted { color: var(--muted); }
+    .hero p { max-width: 540px; }
+
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 11px 17px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-weight: 750;
+      font-size: .9rem;
+      background: var(--panel);
+    }
+
+    .btn.primary {
+      background: var(--blue2);
+      border-color: var(--blue2);
+      color: white;
+    }
+
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.12); }
+
+    .hero-art {
+      min-height: 270px;
+      border: 1px solid #1d4167;
+      border-radius: 25px;
+      background:
+        radial-gradient(ellipse at 50% 35%, #164e7b 0%, transparent 55%),
+        linear-gradient(145deg, #142743, #0c1322 70%);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-art::before, .hero-art::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 1px solid #38bdf855;
+      transform: rotate(45deg);
+    }
+
+    .hero-art::after { width: 125px; height: 125px; }
+    .gamepad { font-size: clamp(5rem, 15vw, 8rem); z-index: 1; }
+
+    section { padding: 65px 0; border-top: 1px solid #17253a; }
+    .section-head { margin-bottom: 25px; }
+    .section-head h2 { margin: 7px 0; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    .card {
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      min-width: 0;
+    }
+
+    .card:hover { border-color: var(--blue); }
+    .card-icon { font-size: 2.2rem; }
+    .card h3 { margin: 10px 0 5px; }
+    .card p { color: var(--muted); font-size: .93rem; }
+
+    .tag {
+      display: inline-block;
+      color: var(--blue);
+      background: #0b2941;
+      padding: 4px 9px;
+      margin: 4px 4px 0 0;
+      border-radius: 20px;
+      font-size: .75rem;
+    }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+
+    .filter {
+      color: var(--muted);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 7px 13px;
+    }
+
+    .filter.active {
+      background: var(--blue2);
+      color: white;
+      border-color: var(--blue2);
+    }
+
+    .about-box {
+      padding: 25px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: linear-gradient(130deg, #101e33, #0c1320);
+    }
+
+    .contact-box { text-align: center; padding: 20px 0; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    :focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; gap: 25px; padding-top: 55px; }
+      .hero-art { min-height: 220px; }
+      .grid { grid-template-columns: 1fr; }
+      .menu-btn { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: #0b1220;
+        padding: 18px 5%;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links.open { display: flex; }
+      h1 { letter-spacing: -1px; }
+      section { padding: 48px 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a class="brand" href="#home">MY <span>GAMING WORLD</span></a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false"
+        aria-controls="navLinks" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#games">Games</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container hero" id="home">
+      <div>
+        <div class="eyebrow">Gamer · Creator · Explorer</div>
+        <h1>WELCOME TO<br>MY <span class="accent">WORLD.</span></h1>
+        <p class="muted">
+          A little corner of the internet for my gaming interests,
+          creative ideas and projects. Explore and enjoy!
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#games">Explore Games ↗</a>
+          <a class="btn" href="#about">About Me</a>
+        </div>
+      </div>
+      <div class="hero-art" role="img" aria-label="Gaming controller illustration">
+        <span class="gamepad" aria-hidden="true">🎮</span>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">The person behind the screen</div>
+          <h2>About <span class="accent">Me</span></h2>
+        </div>
+        <div class="about-box">
+          <h3>Hey, welcome to my space!</h3>
+          <p class="muted">
+            I'm a gaming fan who enjoys exploring different games,
+            discovering new ideas and learning creative skills.
+            This website is my personal portfolio and gaming hub.
+          </p>
+          <span class="tag">Gaming</span>
+          <span class="tag">Creativity</span>
+          <span class="tag">Learning</span>
+          <span class="tag">Technology</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="games">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Choose your adventure</div>
+          <h2>My <span class="accent">Games</span></h2>
+          <p class="muted">Some of the gaming worlds I enjoy.</p>
+        </div>
+
+        <div class="filters" aria-label="Filter games">
+          <button class="filter active" data-filter="all">All Games</button>
+          <button class="filter" data-filter="sandbox">Sandbox</button>
+          <button class="filter" data-filter="action">Action</button>
+          <button class="filter" data-filter="sports">Sports</button>
+        </div>
+
+        <div class="grid" id="gameGrid">
+          <article class="card" data-category="sandbox">
+            <div class="card-icon" aria-hidden="true">⛏️</div>
+            <h3>Minecraft</h3>
+            <p>Build, explore, survive and create your own adventures.</p>
+            <span class="tag">Sandbox</span>
+            <span class="tag">Survival</span>
+          </article>
+
+          <article class="card" data-category="action">
+            <div class="card-icon" aria-hidden="true">⚔️</div>
+            <h3>Action Games</h3>
+            <p>Fast-paced challenges, exciting missions and epic worlds.</p>
+            <span class="tag">Action</span>
+            <span class="tag">Adventure</span>
+          </article>
+
+          <article class="card" data-category="sports">
+            <div class="card-icon" aria-hidden="true">⚽</div>
+            <h3>Sports Games</h3>
+            <p>Competition, teamwork and memorable match moments.</p>
+            <span class="tag">Sports</span>
+            <span class="tag">Competition</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Things I'm working on</div>
+          <h2>My <span class="accent">Projects</span></h2>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🌐</div>
+            <h3>This Website</h3>
+            <p>My first personal portfolio and gaming website.</p>
+            <span class="tag">Web Design</span>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🎬</div>
+            <h3>Gaming Content</h3>
+            <p>A place to collect future gaming videos and highlights.</p>
+            <span class="tag">Creative</span>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">💡</div>
+            <h3>Future Ideas</h3>
+            <p>More guides, useful tools and projects to come.</p>
+            <span class="tag">Coming Soon</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-box">
+        <div class="eyebrow">Let's connect</div>
+        <h2>Thanks for <span class="accent">visiting!</span></h2>
+        <p class="muted">
+          More gaming, more creativity and more projects coming soon.
+        </p>
+        <a class="btn primary" href="#home">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> My Gaming World · Made with 💙
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter").forEach(item => {
+          item.classList.remove("active");
+        });
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+        document.querySelectorAll("#gameGrid .card").forEach(card => {
+          card.hidden = filter !== "all" &&
+            card.dataset.category !== filter;
+        });
+      });
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
